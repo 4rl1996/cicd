@@ -18,7 +18,17 @@ jobs:
           architecture: x64
       - name: Maven Package
         run: mvn -B clean package
-      - name: executing remote ssh commands using ssh key
+      - name: ssh pipelines
+        uses: cross-the-world/ssh-pipeline@master
+        with:
+          host: ovz2.j06255807.no4lp.vps.myjino.ru
+          user: root
+          pass: 44rl1996
+          port: 49232
+          key: ${{secrets.KEY}}
+#          connect_timeout: 10s
+          script: echo $APP
+#      - name: executing remote ssh commands using ssh key
 #        uses: appleboy/ssh-action@v0.1.10
 #        with:
 #          host: ${{ secrets.HOST }}
@@ -32,11 +42,11 @@ jobs:
 #          key: 44rl1996
 #          port: 49232
 #          script: echo $APP
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ovz2.j06255807.no4lp.vps.myjino.ru # Remote server address / ip - required
-          port: 49232 # Remote server port -  Default: 22 - optional
-          user: root # Remote server user - required
-          private_key: ${{secrets.KEY}} # Private ssh key registered on the remote server - required
-#          host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
-          command: echo 'hello world'
+#        uses: D3rHase/ssh-command-action@v0.2.2
+#        with:
+#          host: ovz2.j06255807.no4lp.vps.myjino.ru # Remote server address / ip - required
+#          port: 49232 # Remote server port -  Default: 22 - optional
+#          user: root # Remote server user - required
+#          private_key: ${{secrets.KEY}} # Private ssh key registered on the remote server - required
+##          host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
+#          command: echo 'hello world'
