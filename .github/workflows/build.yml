@@ -7,11 +7,6 @@ on:
 
 jobs:
   build:
-    env:
-      FAIL: ❌
-      SUCCESS: ✅
-      SKIPPED: ⏩
-      CANCELLED: ⛔
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -41,11 +36,6 @@ jobs:
           envs: APP
           script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
       - name: send telegram message on push
-        env:
-          MVN_STATUS:
-          DEPLOY_STATUS:
-        if: steps.deploy.outcome == 'success'
-        run: MVN_STATUS=${env.SUCCESS}
         uses: appleboy/telegram-action@master
         with:
           to: -933719856
@@ -57,7 +47,7 @@ jobs:
             Repository: ${{ github.repository }}
             
             Jobs results:
-            - maven_package: ${{steps.mvn.outcome}} ${{MVN_STATUS}}
-            - deploy_app: ${{steps.deploy.outcome}}
+            - maven_package: ${upper(${{steps.mvn.outcome}})} 
+            - deploy_app: ${upper(${{steps.deploy.outcome}})}
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
