@@ -29,7 +29,7 @@ jobs:
           port: 49232
           key: ${{secrets.KEY}}
 #          connect_timeout: 10s
-          script: echo $WELCOME
+          script: cd cicd && bash start-script.sh
 #      - name: executing remote ssh commands using ssh key
 #        uses: appleboy/ssh-action@v0.1.10
 #        with:
