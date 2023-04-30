@@ -19,17 +19,24 @@ jobs:
       - name: Maven Package
         run: mvn -B clean package
       - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v0.1.10
+#        uses: appleboy/ssh-action@v0.1.10
 #        with:
 #          host: ${{ secrets.HOST }}
 #          username: ${{ secrets.USERNAME }}
 #          key: ${{ secrets.KEY }}
 #          port: ${{ secrets.PORT }}
 #          script: echo $APP
+#        with:
+#          host: ovz2.j06255807.no4lp.vps.myjino.ru
+#          username: root
+#          key: 44rl1996
+#          port: 49232
+#          script: echo $APP
+        uses: D3rHase/ssh-command-action@{version}
         with:
-          host: ovz2.j06255807.no4lp.vps.myjino.ru
-          username: root
-          key: 44rl1996
-          port: 49232
-          passphrase: yes
-          script: echo $APP
+          host: ovz2.j06255807.no4lp.vps.myjino.ru # Remote server address / ip - required
+          port: 49232 # Remote server port -  Default: 22 - optional
+          user: root # Remote server user - required
+          private_key: ${{secrets.KEY}} # Private ssh key registered on the remote server - required
+#          host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
+          command: echo 'hello world'
