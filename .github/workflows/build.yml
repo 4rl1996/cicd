@@ -16,9 +16,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           architecture: x64
-      - name: Maven Package
+      - name: maven_package
+        continue-on-error: true
         run: mvn -B clean package
-      - name: deploy app
+      - name: deploy_app
+        continue-on-error: true
         uses: appleboy/ssh-action@v0.1.10
         env:
           APP: "CicdApplication"
@@ -41,6 +43,8 @@ jobs:
               
             Repository: ${{ github.repository }}
             
-            Result:  ${{ job.status }}
-              
+            Jobs results:
+            - maven_package: ${{steps.maven_package.outcome}}
+            - deploy_app: ${{steps.deploy_app.outcome}}
+            
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
