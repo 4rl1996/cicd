@@ -10,6 +10,6 @@ public class Controller {
 
     @GetMapping("/test")
     public String test(){
-        return "Hack The World!";
+        return "2 phase action!";
     }
 }
