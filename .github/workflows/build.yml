@@ -14,5 +14,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
+          distribution: 'openjdk'
+          architecture: x64
       - name: Maven Package
         run: mvn -B clean package -DskipTests
