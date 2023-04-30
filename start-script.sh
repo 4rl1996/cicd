@@ -19,4 +19,3 @@ else
 
     printf "Please, 'tail -f log' for log output.\n"
 fi
-exit 1
