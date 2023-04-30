@@ -18,3 +18,17 @@ jobs:
           architecture: x64
       - name: Maven Package
         run: mvn -B clean package
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v0.1.10
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.USERNAME }}
+#          key: ${{ secrets.KEY }}
+#          port: ${{ secrets.PORT }}
+#          script: echo $APP
+        with:
+          host: ovz2.j06255807.no4lp.vps.myjino.ru
+          username: root
+          key: @4rl1996
+          port: 49232
+          script: echo $APP
