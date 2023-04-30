@@ -29,6 +29,7 @@ jobs:
         with:
           host: ovz2.j06255807.no4lp.vps.myjino.ru
           username: root
-          key: '@4rl1996'
+          key: !4rl1996
           port: 49232
+          passphrase: yes
           script: echo $APP
