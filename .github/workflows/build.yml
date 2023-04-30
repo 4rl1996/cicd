@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - 'master'
+      - 'master' #запускать при пуше в мастер
 
 jobs:
   build:
@@ -16,30 +16,31 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           architecture: x64
-      - name: maven_package
-        id: mvn
+      - name: maven_package #название шага
+        id: mvn # ид шага
         continue-on-error: true
-        run: mvn -B clean package
+        run: mvn -B clean package #билд с тестами
       - name: deploy_app
-        if: ${{steps.mvn.outcome == 'success'}}
+        if: ${{steps.mvn.outcome == 'success'}} #если предыдущий шаг успшный, запустить деплой
         id: deploy
         continue-on-error: true
         uses: appleboy/ssh-action@v0.1.10
         env:
-          APP: "CicdApplication"
+          APP: "CicdApplication" #имя процесса == имя класса с Main
+          REPO: "cicd" #папка с репозиторием
         with:
           host: ovz2.j06255807.no4lp.vps.myjino.ru
           username: root
           key: ${{secrets.KEY}}
           port: 49232
           password: 44rl1996
-          envs: APP
-          script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
+          envs: APP, REPO #какие переменные использовать
+          script: cd $REPO && git pull origin master && export APP=$APP && bash start-script.sh
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
         with:
-          to: -933719856
-          token: 6259651648:AAHxT-1sYfWIcRQD-Bo6moYgu9gJZ7AJIYo
+          to: -933719856 # id чата
+          token: 6259651648:AAHxT-1sYfWIcRQD-Bo6moYgu9gJZ7AJIYo # токен бота
           message: |
             ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
@@ -47,7 +48,7 @@ jobs:
             Repository: ${{ github.repository }}
             
             Jobs results:
-            - maven_package: upper(${{steps.mvn.outcome}})
-            - deploy_app: ${{steps.deploy.outcome}})
+            - maven_package: ${{steps.mvn.outcome}}
+            - deploy_app: ${{steps.deploy.outcome}} 
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
