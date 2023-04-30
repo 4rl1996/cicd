@@ -19,30 +19,30 @@ jobs:
       - name: Maven Package
         run: mvn -B clean package
       - name: ssh pipelines
-        uses: fifsky/ssh-action@master
-        with:
-          command: |
-            cd cicd
-            git pull origin master
-            export APP=$APP
-            bash start-script.sh
-            export APP=CicdApplication
-            bash start-script.sh
-          host: ovz2.j06255807.no4lp.vps.myjino.ru
-          user: root
-          key: ${{secrets.KEY}}
-          pass: 44rl1996
-#        uses: cross-the-world/ssh-pipeline@master
-#        env:
-#          APP: CicdApplication
+#        uses: fifsky/ssh-action@master
 #        with:
+#          command: |
+#            cd cicd
+#            git pull origin master
+#            export APP=$APP
+#            bash start-script.sh
+#            export APP=CicdApplication
+#            bash start-script.sh
 #          host: ovz2.j06255807.no4lp.vps.myjino.ru
 #          user: root
-#          pass: 44rl1996
-#          port: 49232
 #          key: ${{secrets.KEY}}
-#          connect_timeout: 10s
-#          script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
+#          pass: 44rl1996
+        uses: cross-the-world/ssh-pipeline@master
+        env:
+          APP: "CicdApplication"
+        with:
+          host: ovz2.j06255807.no4lp.vps.myjino.ru
+          user: root
+          pass: 44rl1996
+          port: 49232
+          key: ${{secrets.KEY}}
+          connect_timeout: 10s
+          script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
 #      - name: executing remote ssh commands using ssh key
 #        uses: appleboy/ssh-action@v0.1.10
 #        with:
