@@ -21,7 +21,7 @@ jobs:
       - name: ssh pipelines
         uses: cross-the-world/ssh-pipeline@master
         env:
-          WELCOME: "ssh pipeline"
+          APP: "CicdApplication"
         with:
           host: ovz2.j06255807.no4lp.vps.myjino.ru
           user: root
@@ -29,7 +29,7 @@ jobs:
           port: 49232
           key: ${{secrets.KEY}}
 #          connect_timeout: 10s
-          script: cd cicd && git pull origin master && bash start-script.sh
+          script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
 #      - name: executing remote ssh commands using ssh key
 #        uses: appleboy/ssh-action@v0.1.10
 #        with:
