@@ -10,6 +10,6 @@ public class Controller {
 
     @GetMapping("/test")
     public String test(){
-        return "2 phase action 2!";
+        return "2 phase action 2!"
     }
 }
