@@ -45,12 +45,15 @@ jobs:
 #          script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
 #      - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.10
+        env:
+          APP: "CicdApplication"
         with:
           host: ovz2.j06255807.no4lp.vps.myjino.ru
           username: root
           key: ${{secrets.KEY}}
           port: 49232
           password: 44rl1996
+          envs: APP
           script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
 #        with:
 #          host: ovz2.j06255807.no4lp.vps.myjino.ru
