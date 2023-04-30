@@ -32,7 +32,7 @@ jobs:
 #          key: 44rl1996
 #          port: 49232
 #          script: echo $APP
-        uses: D3rHase/ssh-command-action@{version}
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
           host: ovz2.j06255807.no4lp.vps.myjino.ru # Remote server address / ip - required
           port: 49232 # Remote server port -  Default: 22 - optional
