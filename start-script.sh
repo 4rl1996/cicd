@@ -15,7 +15,7 @@ else
 
     sleep 3
     printf "Start $APP with 'nohup' command.\n"
-    nohup mvn clean package -DskipTests spring-boot:run > log &
+    nohup mvn clean package -DskipTests spring-boot:run > log 2> log.err < /dev/null &
 
     printf "Please, 'tail -f log' for log output.\n"
 fi
