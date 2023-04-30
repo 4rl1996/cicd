@@ -18,10 +18,6 @@ jobs:
           architecture: x64
       - name: Maven Package
         run: mvn -B clean package
-
-  deploy:
-    runs-on: ubuntu-20.04
-    steps:
       - name: deploy app
         uses: appleboy/ssh-action@v0.1.10
         env:
