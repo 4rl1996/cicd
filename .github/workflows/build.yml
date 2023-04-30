@@ -17,4 +17,4 @@ jobs:
           distribution: 'adopt'
           architecture: x64
       - name: Maven Package
-        run: mvn -B clean package -DskipTests
+        run: mvn -B clean package
