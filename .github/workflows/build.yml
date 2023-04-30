@@ -17,9 +17,12 @@ jobs:
           distribution: 'adopt'
           architecture: x64
       - name: maven_package
+        id: mvn
         continue-on-error: true
         run: mvn -B clean package
       - name: deploy_app
+        if: ${{steps.mvn.outcome == 'success'}}
+        id: deploy
         continue-on-error: true
         uses: appleboy/ssh-action@v0.1.10
         env:
@@ -44,7 +47,7 @@ jobs:
             Repository: ${{ github.repository }}
             
             Jobs results:
-            - maven_package: ${{steps.maven_package.outcome}}
-            - deploy_app: ${{steps.deploy_app.outcome}}
+            - maven_package: ${{steps.mvn.outcome}}
+            - deploy_app: ${{steps.deploy.outcome}}
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
