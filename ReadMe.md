@@ -1,0 +1,1 @@
+![example event parameter](https://github.com/4rl1996/cicd/actions/workflows/main.yml/badge.svg?event=push)
