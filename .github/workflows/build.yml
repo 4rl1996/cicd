@@ -32,25 +32,26 @@ jobs:
 #          user: root
 #          key: ${{secrets.KEY}}
 #          pass: 44rl1996
-        uses: cross-the-world/ssh-pipeline@master
-        env:
-          APP: "CicdApplication"
+#        uses: cross-the-world/ssh-pipeline@master
+#        env:
+#          APP: "CicdApplication"
+#        with:
+#          host: ovz2.j06255807.no4lp.vps.myjino.ru
+#          user: root
+#          pass: 44rl1996
+#          port: 49232
+#          key: ${{secrets.KEY}}
+#          connect_timeout: 10s
+#          script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
+#      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ovz2.j06255807.no4lp.vps.myjino.ru
-          user: root
-          pass: 44rl1996
-          port: 49232
+          username: root
           key: ${{secrets.KEY}}
-          connect_timeout: 10s
+          port: 49232
+          password: 44rl1996
           script: cd cicd && git pull origin master && export APP=$APP && bash start-script.sh
-#      - name: executing remote ssh commands using ssh key
-#        uses: appleboy/ssh-action@v0.1.10
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ${{ secrets.USERNAME }}
-#          key: ${{ secrets.KEY }}
-#          port: ${{ secrets.PORT }}
-#          script: echo $APP
 #        with:
 #          host: ovz2.j06255807.no4lp.vps.myjino.ru
 #          username: root
