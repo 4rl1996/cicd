@@ -41,6 +41,6 @@ jobs:
               
             Repository: ${{ github.repository }}
             
-            Result:  ${{ github.workflow.status }}
+            Result:  ${{ job.status }}
               
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
