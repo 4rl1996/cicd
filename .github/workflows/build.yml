@@ -51,3 +51,5 @@ jobs:
             - deploy_app: ${{steps.deploy.outcome}}
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+          if: steps.mvn.outcome == 'failure' || steps.deploy.outcome == 'failure'
+          run: exit 1
